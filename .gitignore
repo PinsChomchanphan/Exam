@@ -1,0 +1,7 @@
+Persistence/bin/
+Application/obj/
+.vs/
+Domain/obj/
+Infrastructure/obj/
+Infrastructure/bin/
+Domain/bin/

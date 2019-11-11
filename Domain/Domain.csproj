@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>Exam2C2P.Domain</RootNamespace>
+    <AssemblyName>Exam2C2P.Domain</AssemblyName>
+  </PropertyGroup>
+
+</Project>
