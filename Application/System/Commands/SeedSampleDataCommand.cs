@@ -12,17 +12,15 @@ namespace Exam2C2P.Application.System.Commands
     public class SeedSampleDataCommandHandler : IRequestHandler<SeedSampleDataCommand>
     {
         private readonly IExamDatabaseDbContext _context;
-        private readonly IUserManager _userManager;
 
-        public SeedSampleDataCommandHandler(IExamDatabaseDbContext context, IUserManager userManager)
+        public SeedSampleDataCommandHandler(IExamDatabaseDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         public async Task<Unit> Handle(SeedSampleDataCommand request, CancellationToken cancellationToken)
         {
-            var seeder = new SampleDataSeeder(_context, _userManager);
+            var seeder = new SampleDataSeeder(_context);
 
             await seeder.SeedAllAsync(cancellationToken);
 

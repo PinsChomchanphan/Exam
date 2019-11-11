@@ -11,12 +11,10 @@ namespace Exam2C2P.Application.System.Commands
     public class SampleDataSeeder
     {
         private readonly IExamDatabaseDbContext _context;
-        private readonly IUserManager _userManager;
 
-        public SampleDataSeeder(IExamDatabaseDbContext context, IUserManager userManager)
+        public SampleDataSeeder(IExamDatabaseDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         public async Task SeedAllAsync(CancellationToken cancellationToken)

@@ -1,40 +1,39 @@
 ﻿using Exam2C2P.Application.Common.Interfaces;
+using Exam2C2P.Application.Helper;
 using Exam2C2P.Domain.Entities;
 using MediatR;
+using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Xml;
 
 namespace Exam2C2P.Application.Transactions.Commands
 {
-    public class FileUploadCommand : IRequest
+    public class FileUploadCommand : IRequest<int>
     {
-     //    public FormFile File { get; set; }
-
-
-        public class Handler : IRequestHandler<FileUploadCommand>
+        public Stream FileStream { get; set; }
+        public string FileType { get; set; }
+        public class FileUploadCommandHandler : IRequestHandler<FileUploadCommand, int>
         {
             private readonly IExamDatabaseDbContext _context;
             private readonly IMediator _mediator;
 
-            public Handler(IExamDatabaseDbContext context, IMediator mediator)
+            public FileUploadCommandHandler(IExamDatabaseDbContext context, IMediator mediator)
             {
                 _context = context;
                 _mediator = mediator;
             }
 
-            public async Task<Unit> Handle(FileUploadCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(FileUploadCommand request, CancellationToken cancellationToken)
             {
-                var entity = new Transaction
-                {
-                   
-                };
 
-                _context.Transactions.AddRange(entity);
 
-                await _context.SaveChangesAsync(cancellationToken);
-
-                return Unit.Value;
+                //_context.Transactions.AddRange(entity);
+                var xml = new TransactionXmlReader();
+                var res = xml.Read(request.FileStream);
+                //await _context.SaveChangesAsync(cancellationToken);
+                return 0;
             }
         }
     }

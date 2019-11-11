@@ -1,7 +1,9 @@
 ﻿using Exam2C2P.Application.Transactions.Commands;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -17,39 +19,57 @@ namespace WebUI.Controllers
         [HttpPost, DisableRequestSizeLimit]
         public async Task<ActionResult> UploadFileAsync()
         {
+
             try
             {
                 var file = Request.Form.Files[0];
-                using (var r = new StreamReader(file.OpenReadStream()))
+                var supportedTypes = new[] { "csv", "xml"};
+                int filesize = 1000000; // bytes
+                var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
                 {
-
-                    while (!r.EndOfStream)
-                    {
-                        string line = r.ReadLine();
-                        //table.Add(Regex.Split(line, @"\s|[;]|[,]"));
-                    }
-
-                    r.Close();
+                    return BadRequest("Unknown format");
                 }
-                //XmlDocument xmlDoc = new XmlDocument();
-                //xmlDoc.Load(file.OpenReadStream());
-                //XmlNodeList nodeList = xmlDoc.DocumentElement.SelectNodes("Transactions");
-                //string proID = "", proName = "", price = "";
-                //foreach (XmlNode node in nodeList)
+                else if (file.Length > filesize)
+                {
+                    return BadRequest("File size Should Be UpTo 1MB");
+                }
+                else
+                {
+                    await Mediator.Send(new FileUploadCommand()
+                    {
+                        FileStream = file.OpenReadStream(),
+                        FileType = fileExt
+                    });
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+          /*  try
+            {
+
+
+                //using (var r = new StreamReader(file.OpenReadStream()))
                 //{
-                //    proID = node.SelectSingleNode("Transaction id").InnerText;
-                //    //proName = node.SelectSingleNode("Product_name").InnerText;
-                //    //price = node.SelectSingleNode("Product_price").InnerText;
-                //    //MessageBox.Show(proID + " " + proName + " " + price);
+
+                //    while (!r.EndOfStream)
+                //    {
+                //        string line = r.ReadLine();
+                //        //table.Add(Regex.Split(line, @"\s|[;]|[,]"));
+                //    }
+
+                //    r.Close();
                 //}
-                var id = 0;
-               //  var id = await Mediator.Send(FileUploadCommand command);
-                return Ok(id);
+                
             }
             catch (System.Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+            */
         }
     }
 }

@@ -11,14 +11,12 @@ namespace Exam2C2P.Application.Common.Behaviours
     {
         private readonly Stopwatch _timer;
         private readonly ILogger<TRequest> _logger;
-        private readonly ICurrentUserService _currentUserService;
 
-        public RequestPerformanceBehaviour(ILogger<TRequest> logger, ICurrentUserService currentUserService)
+        public RequestPerformanceBehaviour(ILogger<TRequest> logger)
         {
             _timer = new Stopwatch();
 
             _logger = logger;
-            _currentUserService = currentUserService;
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
@@ -33,8 +31,8 @@ namespace Exam2C2P.Application.Common.Behaviours
             {
                 var name = typeof(TRequest).Name;
 
-                _logger.LogWarning("Application Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@Request}", 
-                    name, _timer.ElapsedMilliseconds, _currentUserService.UserId, request);
+                _logger.LogWarning("Application Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds)  {@Request}", 
+                    name, _timer.ElapsedMilliseconds, request);
             }
 
             return response;

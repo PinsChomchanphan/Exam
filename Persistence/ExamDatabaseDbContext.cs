@@ -22,7 +22,7 @@ namespace Exam2C2P.Persistence
             ICurrentUserService currentUserService)
             : base(options)
         {
-            _currentUserService = currentUserService;
+
         }
 
         public DbSet<Transaction> Transactions { get; set; }
@@ -34,11 +34,11 @@ namespace Exam2C2P.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.CreatedBy = null;
                         entry.Entity.Created = DateTime.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedBy = _currentUserService.UserId;
+                        entry.Entity.LastModifiedBy = null;
                         entry.Entity.LastModified = DateTime.Now;
                         break;
                 }
