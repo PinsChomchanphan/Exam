@@ -1,0 +1,21 @@
+
+<app-header></app-header>
+<div style="text-align:center">
+    <h1>
+        Welcome to {{ title }}!
+    </h1>
+</div>
+<input #file accept=".csv, .xml" type="file" (change)="upload(file.files)" />
+<br />
+<span style="font-weight:bold;color:green;" *ngIf="progress > 0 && progress < 100">
+    {{progress}}%
+</span>
+<span style="font-weight:bold;color:green;" *ngIf="!isError">
+    {{message}}
+</span>
+<span style="font-weight:bold;color:red;" *ngIf="isError">
+    {{message}}
+</span>
+
+<router-outlet></router-outlet>
+<app-footer></app-footer>
