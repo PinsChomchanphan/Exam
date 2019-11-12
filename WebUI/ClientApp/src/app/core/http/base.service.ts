@@ -10,10 +10,6 @@ export class BaseService {
 
     constructor(public http: HttpClient) { }
 
-
-    public url = 'https://jsonplaceholder.typicode.com/posts';
-
-
     //getPosts(param) {
     //    return this.http.get(this.url + param);
     //}

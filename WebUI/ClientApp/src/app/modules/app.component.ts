@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../core/http/Transaction/transaction.service';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SearchTransaction } from '../shared/models/Transaction/search-transaction';
 
 @Component({
     selector: 'app-root',
@@ -17,16 +18,23 @@ export class AppComponent implements OnInit {
     public isError: boolean;
     appLoader = true;
     public list: any[];
+    public searchTransaction: SearchTransaction = new SearchTransaction();
     public transactions: Observable<any[]>
 
     constructor(private tranService: TransactionService) {
         this.isError = false;
        //  this.getAll();
+        this.searchTransaction.currencyCode = "USD";
+        this.searchTransaction.status = "D";
+        this.tranService.getTransactions(this.searchTransaction).subscribe(result => {
+            debugger;
+        }, error => console.error(error));
     }
 
     ngOnInit() {
 
         this.transactions = this.tranService.GetAll();
+  
     }
 
     public getAll() {

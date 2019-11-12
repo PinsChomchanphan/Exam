@@ -43,6 +43,7 @@
     <None Remove="ClientApp\src\app\core\core.module.ts" />
     <None Remove="ClientApp\src\app\core\footer\footer.component.ts" />
     <None Remove="ClientApp\src\app\core\http\base.service.ts" />
+    <None Remove="ClientApp\src\app\shared\models\Transaction\search-transaction.ts" />
     <None Remove="ClientApp\src\app\shared\shared.module.ts" />
   </ItemGroup>
 
@@ -55,7 +56,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\shared\components\" />
-    <Folder Include="ClientApp\src\app\shared\models\" />
   </ItemGroup>
 
 
@@ -63,6 +63,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\core\core.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\core\footer\footer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\core\http\base.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\Transaction\search-transaction.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\shared.module.ts" />
   </ItemGroup>
 
