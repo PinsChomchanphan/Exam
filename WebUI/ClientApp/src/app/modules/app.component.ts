@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../core/http/Transaction/transaction.service';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -15,11 +16,25 @@ export class AppComponent implements OnInit {
     public message: string;
     public isError: boolean;
     appLoader = true;
+    public list: any[];
+    public transactions: Observable<any[]>
+
     constructor(private tranService: TransactionService) {
         this.isError = false;
+       //  this.getAll();
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+
+        this.transactions = this.tranService.GetAll();
+    }
+
+    public getAll() {
+        this.tranService.GetAll().subscribe(result => {
+            this.list = result;
+        }, error => console.error(error));
+    }
+
 
     upload(files) {
 

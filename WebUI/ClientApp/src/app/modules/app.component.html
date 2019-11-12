@@ -16,6 +16,26 @@
 <span style="font-weight:bold;color:red;" *ngIf="isError">
     {{message}}
 </span>
+<content>
+    <router-outlet></router-outlet>
+    <br />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Transaction Id</th>
+                <th>Payment</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of transactions | async">
+                <td>{{t.transactionId}}</td>
+                <td>{{t.payment}}</td>
+                <td>{{t.status}}</td>
 
-<router-outlet></router-outlet>
+            </tr>
+        </tbody>
+    </table>
+</content>
+
 <app-footer></app-footer>

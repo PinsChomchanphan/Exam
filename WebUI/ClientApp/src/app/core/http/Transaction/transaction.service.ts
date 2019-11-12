@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base.service';
 import { HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 
@@ -15,6 +16,13 @@ export class TransactionService {
         });
         // return this.http.get(this.url);  
         return this.BaseService.http.request(uploadReq);
+    }
+
+
+    GetAll(): Observable<any> {
+       
+        // return this.http.get(this.url);  
+        return this.BaseService.http.get('api/transaction');
     }
 
 }

@@ -1,5 +1,4 @@
 ﻿using Exam2C2P.Application.Common.Interfaces;
-using Exam2C2P.Application.Helper;
 using Exam2C2P.Domain.Entities;
 using Exam2C2P.Domain.Enums;
 using MediatR;
@@ -84,7 +83,7 @@ namespace Exam2C2P.Application.Transactions.Commands
                             Created = DateTime.UtcNow,
                             FileType = CSV,
                             TransactionDate = Convert.ToDateTime(fields[3]),
-                            Status = fields[4]
+                            Status = CheckStatus(CSV,fields[4])
 
                         };
                         transactionList.Add(model);
@@ -158,7 +157,7 @@ namespace Exam2C2P.Application.Transactions.Commands
                                         throw new Exception("The data is not correct");
                                     break;
                                 case "Status":
-                                    model.Status = reader.ReadString();
+                                    model.Status = CheckStatus(XML, reader.ReadString());
                                     break;
 
                             }
@@ -172,6 +171,44 @@ namespace Exam2C2P.Application.Transactions.Commands
                 {
                     throw new Exception(ex.Message);
                 }
+
+            }
+
+
+            private string CheckStatus(string type , string data)
+            {
+                string outStatus = string.Empty;
+                if (type.Equals("csv", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    switch (data)
+                    {
+                        case "Approved":
+                            outStatus = "A";
+                            break;
+                        case "Failed":
+                            outStatus = "R";
+                            break;
+                        case "Finished ":
+                            outStatus = "D";
+                            break;
+                    }
+                }
+                else if (type.Equals("xml", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    switch (data)
+                    {
+                        case "Approved":
+                            outStatus = "A";
+                            break;
+                        case "Rejected":
+                            outStatus = "R";
+                            break;
+                        case "Done":
+                            outStatus = "D";
+                            break;
+                    }
+                }
+                return outStatus;
 
             }
         }
