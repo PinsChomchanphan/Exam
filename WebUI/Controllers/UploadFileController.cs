@@ -19,7 +19,6 @@ namespace WebUI.Controllers
         [HttpPost, DisableRequestSizeLimit]
         public async Task<ActionResult> UploadFileAsync()
         {
-
             try
             {
                 var file = Request.Form.Files[0];
@@ -48,28 +47,7 @@ namespace WebUI.Controllers
             {
                 return BadRequest(ex.Message);
             }
-          /*  try
-            {
 
-
-                //using (var r = new StreamReader(file.OpenReadStream()))
-                //{
-
-                //    while (!r.EndOfStream)
-                //    {
-                //        string line = r.ReadLine();
-                //        //table.Add(Regex.Split(line, @"\s|[;]|[,]"));
-                //    }
-
-                //    r.Close();
-                //}
-                
-            }
-            catch (System.Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            */
         }
     }
 }
