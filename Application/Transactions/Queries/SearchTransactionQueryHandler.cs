@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Exam2C2P.Application.Transactions.Queries
 {
 
-    public class SearchTransactionQueryHandler : IRequestHandler<GetTransactionQuery, IEnumerable<TransactionDto>>
+    public class SearchTransactionQueryHandler : IRequestHandler<SearchTransactionQuery, IEnumerable<TransactionDto>>
     {
         private readonly IExamDatabaseDbContext _context;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace Exam2C2P.Application.Transactions.Queries
             _context = context;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<TransactionDto>> Handle(GetTransactionQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TransactionDto>> Handle(SearchTransactionQuery request, CancellationToken cancellationToken)
         {
 
             var res = await _context.Transactions
