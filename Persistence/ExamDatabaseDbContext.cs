@@ -27,6 +27,8 @@ namespace Exam2C2P.Persistence
 
         public DbSet<Transaction> Transactions { get; set; }
 
+        public DbSet<EventLog> EventLogs { get; set; }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())

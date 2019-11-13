@@ -9,6 +9,7 @@ namespace Exam2C2P.Application.Common.Interfaces
     {
         DbSet<Transaction> Transactions { get; set; }
 
+        DbSet<EventLog> EventLogs { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

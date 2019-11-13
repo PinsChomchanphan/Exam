@@ -29,7 +29,7 @@ namespace WebUI
             
             services.AddInfrastructure(Configuration, Environment);
             services.AddPersistence(Configuration);
-            services.AddApplication();
+            services.AddApplication(Configuration);
 
             services.AddHealthChecks()
                 .AddDbContextCheck<ExamDatabaseDbContext>();
