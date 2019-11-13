@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "WebUI\WebUI.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4C405241-FE16-438D-9BFD-9FEF54CD5866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.UnitTests", "Tests\Application.UnitTests\Application.UnitTests.csproj", "{535E3DE9-BCB2-44E7-A19B-8A609E6A55E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "Tests\Application.UnitTests\Application.UnitTests.csproj", "{535E3DE9-BCB2-44E7-A19B-8A609E6A55E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI.IntegrationTests", "Tests\WebUI.IntegrationTests\WebUI.IntegrationTests.csproj", "{0AADBE7E-DE1F-4CEB-828D-E5340EBA34DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{535E3DE9-BCB2-44E7-A19B-8A609E6A55E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{535E3DE9-BCB2-44E7-A19B-8A609E6A55E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{535E3DE9-BCB2-44E7-A19B-8A609E6A55E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AADBE7E-DE1F-4CEB-828D-E5340EBA34DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AADBE7E-DE1F-4CEB-828D-E5340EBA34DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AADBE7E-DE1F-4CEB-828D-E5340EBA34DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AADBE7E-DE1F-4CEB-828D-E5340EBA34DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 		{29D21275-FB78-4C6F-BC04-CB7D0AE02146} = {CA6F3AB9-7B6F-4D11-9888-DCA503541805}
 		{BBCB226B-A665-4993-938A-0542D6B1F8FE} = {29D21275-FB78-4C6F-BC04-CB7D0AE02146}
 		{535E3DE9-BCB2-44E7-A19B-8A609E6A55E6} = {4C405241-FE16-438D-9BFD-9FEF54CD5866}
+		{0AADBE7E-DE1F-4CEB-828D-E5340EBA34DB} = {4C405241-FE16-438D-9BFD-9FEF54CD5866}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6A84686-7BB6-4258-8591-335780544D63}

@@ -32,8 +32,16 @@ namespace Exam2C2P.Application.System.Commands
         {
             var transaction = new[]
             {
-                
-                new Transaction { }
+
+                new Transaction { TransactionId ="Invoice0000001",
+                    Amount = 1000,
+                    TransactionDate = Convert.ToDateTime("2019-01-23T13:45:10"),
+                    CurrencyCode= "USD" ,Status="D" , FileType ="xml"},
+
+                new Transaction { TransactionId ="Invoice0000002",
+                    Amount = 2000,
+                    TransactionDate = Convert.ToDateTime("2019-01-23T13:45:10"),
+                    CurrencyCode= "USD" ,Status="D" , FileType ="csv"},
             };
 
             _context.Transactions.AddRange(transaction);
