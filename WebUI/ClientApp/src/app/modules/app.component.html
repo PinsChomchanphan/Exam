@@ -22,14 +22,14 @@
 
     <div class="row">
         <div class="col-md-3">
-            <select class="form-control">
+            <select class="form-control" [(ngModel)]="searchTransaction.currencyCode" (ngModelChange)="search()" >
                 <option value="">-- Select Currency code --</option>
-                <option *ngFor="let cc of currencyCodes | async" value="cc">{{cc}}</option>
+                <option *ngFor="let cc of currencyCodes | async" value="{{cc}}">{{cc}}</option>
             </select>
 
         </div>
         <div class="col-md-3">
-            <select class="form-control">
+            <select class="form-control" [(ngModel)]="searchTransaction.status" (ngModelChange)="search()">
                 <option value="">-- Select Status --</option>
                 <option value="A">A</option>
                 <option value="R">R</option>
@@ -39,11 +39,12 @@
         <div class="col-md-3">
             <div class="form-group">
                 <div class="input-group">
-                    <input class="form-control" placeholder= "Start date" name="d2" #c2="ngModel" [(ngModel)]="model2"
-                        ngbDatepicker #d2="ngbDatepicker">
+                    <input class="form-control" placeholder="Start date" name="d1" #c2="ngModel" [(ngModel)]="searchTransaction.startDate"
+                           ngbDatepicker #d1="ngbDatepicker" (ngModelChange)="search()" dateFormat="yyyy-mm-dd">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><i
-                                class="fa fa-calendar" aria-hidden="true"></i></button>
+                        <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -51,18 +52,18 @@
         <div class="col-md-3">
             <div class="form-group">
                 <div class="input-group">
-                    <input class="form-control" placeholder="To date" name="d2" #c2="ngModel" [(ngModel)]="model2"
-                        ngbDatepicker #d2="ngbDatepicker">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="d2" #c2="ngModel" [(ngModel)]="searchTransaction.dueDate"
+                           ngbDatepicker #d2="ngbDatepicker" (ngModelChange)="search()"
+                           dateFormat="yyyy-mm-dd">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
-                            <i class="fa fa-calendar" aria-hidden="true"></i></button>
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
     <table class="table table-hover">
         <thead>
             <tr>
@@ -72,7 +73,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let t of transactions | async">
+            <tr *ngFor="let t of list">
                 <td>{{t.transactionId}}</td>
                 <td>{{t.payment}}</td>
                 <td>{{t.status}}</td>

@@ -4,11 +4,13 @@ import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SearchTransaction } from '../shared/models/Transaction/search-transaction';
 import { DropdownService } from '../core/http/dropdown/dropdown.service';
+import { NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
 })
 
 
@@ -22,31 +24,19 @@ export class AppComponent implements OnInit {
     public searchTransaction: SearchTransaction = new SearchTransaction();
     public transactions: Observable<any[]>
     public currencyCodes: Observable<any[]>
-    
 
-    public datepickerOpts = {
-        startDate: new Date(2016, 5, 10),
-        autoclose: true,
-        todayBtn: 'linked',
-        todayHighlight: true,
-        assumeNearbyYear: true,
-        format: 'D, d MM yyyy'
-    };
-    
 
     constructor(private tranService: TransactionService, private ddService : DropdownService) {
         this.isError = false;
-       //  this.getAll();
-        this.searchTransaction.currencyCode = "USD";
-        this.searchTransaction.status = "D";
-        this.tranService.getTransactions(this.searchTransaction).subscribe(result => {
-        }, error => console.error(error));
+        this.getAll();
     }
 
     ngOnInit() {
 
         this.transactions = this.tranService.GetAll();
         this.currencyCodes = this.ddService.getCurrencyCodes();
+        this.searchTransaction.status = "";
+        this.searchTransaction.currencyCode = "";
     }
 
     public getAll() {
@@ -54,7 +44,11 @@ export class AppComponent implements OnInit {
             this.list = result;
         }, error => console.error(error));
     }
-
+    public search() {
+        this.tranService.getTransactions(this.searchTransaction).subscribe(result => {
+            this.list = result;
+        }, error => console.error(error));
+    }
 
     upload(files) {
 
@@ -84,6 +78,7 @@ export class AppComponent implements OnInit {
             else if (event.type === HttpEventType.Response) {
                 this.message = 'Success';
                 this.isError = false;
+                this.getAll();
             }
                 
         }, (error: HttpErrorResponse) => {

@@ -28,7 +28,7 @@ namespace Exam2C2P.Application.Transactions.Queries
                         orderby t.Created descending
                         select t).AsQueryable(); 
 
-            if (!string.IsNullOrEmpty(request.CurrencyCode))
+            if (!string.IsNullOrEmpty(request.CurrencyCode) && !request.CurrencyCode.Equals("ALL", StringComparison.CurrentCultureIgnoreCase))
             {
                 query = query.Where(x => x.CurrencyCode == request.CurrencyCode);
             }

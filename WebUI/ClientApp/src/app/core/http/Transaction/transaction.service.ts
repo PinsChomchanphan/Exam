@@ -22,7 +22,7 @@ export class TransactionService {
     }
 
     getTransactions(filter: any): Observable<any> {
-        return this.baseService.http.get('/api/transaction/search' + '?' + this.queryString(filter));
+        return this.baseService.http.post('/api/transaction/search', filter);
     }
 
     queryString(obj: any) {

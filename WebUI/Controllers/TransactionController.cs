@@ -20,9 +20,9 @@ namespace WebUI.Controllers
             return Ok(await Mediator.Send(new GetTransactionQuery()));
         }
 
-        [HttpGet("search")]
+        [HttpPost("search")]
         [AllowAnonymous]
-        public async Task<ActionResult<List<TransactionDto>>> SearchByData([FromQuery]SearchTransactionQuery query)
+        public async Task<ActionResult<List<TransactionDto>>> SearchByData(SearchTransactionQuery query)
         {
             return Ok(await Mediator.Send(query));
         }
