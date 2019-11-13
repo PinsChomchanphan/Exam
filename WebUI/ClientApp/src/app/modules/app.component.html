@@ -1,4 +1,3 @@
-
 <app-header></app-header>
 <div style="text-align:center">
     <h1>
@@ -21,10 +20,49 @@
     <br />
     <br />
 
-    <!--<select [(ngModel)]="yourOption" id="category">
-        <option value="" disabled selected>>select an option</option>
-        <option *ngFor="let option of options$ | async" [value]="option.value">{item.category}}</option>
-    </select>-->
+    <div class="row">
+        <div class="col-md-3">
+            <select class="form-control">
+                <option value="">-- Select Currency code --</option>
+                <option *ngFor="let cc of currencyCodes | async" value="cc">{{cc}}</option>
+            </select>
+
+        </div>
+        <div class="col-md-3">
+            <select class="form-control">
+                <option value="">-- Select Status --</option>
+                <option value="A">A</option>
+                <option value="R">R</option>
+                <option value="D">D</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" placeholder= "Start date" name="d2" #c2="ngModel" [(ngModel)]="model2"
+                        ngbDatepicker #d2="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><i
+                                class="fa fa-calendar" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" placeholder="To date" name="d2" #c2="ngModel" [(ngModel)]="model2"
+                        ngbDatepicker #d2="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
+                            <i class="fa fa-calendar" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <table class="table table-hover">
         <thead>
             <tr>

@@ -3,6 +3,7 @@ import { TransactionService } from '../core/http/Transaction/transaction.service
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SearchTransaction } from '../shared/models/Transaction/search-transaction';
+import { DropdownService } from '../core/http/dropdown/dropdown.service';
 
 @Component({
     selector: 'app-root',
@@ -20,21 +21,32 @@ export class AppComponent implements OnInit {
     public list: any[];
     public searchTransaction: SearchTransaction = new SearchTransaction();
     public transactions: Observable<any[]>
+    public currencyCodes: Observable<any[]>
+    
 
-    constructor(private tranService: TransactionService) {
+    public datepickerOpts = {
+        startDate: new Date(2016, 5, 10),
+        autoclose: true,
+        todayBtn: 'linked',
+        todayHighlight: true,
+        assumeNearbyYear: true,
+        format: 'D, d MM yyyy'
+    };
+    
+
+    constructor(private tranService: TransactionService, private ddService : DropdownService) {
         this.isError = false;
        //  this.getAll();
         this.searchTransaction.currencyCode = "USD";
         this.searchTransaction.status = "D";
         this.tranService.getTransactions(this.searchTransaction).subscribe(result => {
-            debugger;
         }, error => console.error(error));
     }
 
     ngOnInit() {
 
         this.transactions = this.tranService.GetAll();
-  
+        this.currencyCodes = this.ddService.getCurrencyCodes();
     }
 
     public getAll() {
