@@ -59,7 +59,7 @@ namespace Exam2C2P.Application.Common.Logger
             {
 
 
-                string query = @"INSERT INTO [dbo].[EventLog]
+                string query = @"INSERT INTO [dbo].[EventLogs]
                            ([EventId]
                            ,[LogLevel]
                            ,[Message]

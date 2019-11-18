@@ -15,7 +15,7 @@ import { NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter } from '@ng-bootstr
 
 
 export class AppComponent implements OnInit {
-    title = '2C2P Exam'
+    title = '2C2P Exam';
     public progress: number;
     public message: string;
     public isError: boolean;
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
             this.message = 'Unknown format';
             return;
         }
-        
+
         this.tranService.uploadFile(formData).subscribe(event => {
             if (event.type === HttpEventType.UploadProgress)
                 this.progress = Math.round(100 * event.loaded / event.total);
@@ -80,7 +80,7 @@ export class AppComponent implements OnInit {
                 this.isError = false;
                 this.getAll();
             }
-                
+
         }, (error: HttpErrorResponse) => {
                 this.message = error.error;
                 this.isError = true;

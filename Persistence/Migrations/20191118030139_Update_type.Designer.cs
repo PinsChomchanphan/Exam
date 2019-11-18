@@ -4,14 +4,16 @@ using Exam2C2P.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Exam2C2P.Persistence.Migrations
 {
     [DbContext(typeof(ExamDatabaseDbContext))]
-    partial class ExamDatabaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191118030139_Update_type")]
+    partial class Update_type
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

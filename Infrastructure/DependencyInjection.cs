@@ -17,14 +17,9 @@ namespace Exam2C2P.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
-        {
-            
-
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
-
-            return services;
-        }
+        //public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
+        //{          
+        //    return services;
+        //}
     }
 }

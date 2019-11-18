@@ -13,7 +13,7 @@ namespace Exam2C2P.Persistence.Configurations
             builder.Property(e => e.Id);
 
             builder.Property(e => e.TransactionId).HasMaxLength(50);
-            builder.Property(e => e.Amount);
+            builder.Property(e => e.Amount).HasColumnType("decimal(18,4)");
             builder.Property(e => e.CurrencyCode);
             builder.Property(e => e.TransactionDate);
             builder.Property(e => e.Status);
