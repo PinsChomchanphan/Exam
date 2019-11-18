@@ -4,11 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace WebUI.Controllers
 {
@@ -17,13 +13,12 @@ namespace WebUI.Controllers
     public class UploadController : BaseController
     {
         [HttpPost, DisableRequestSizeLimit]
-        public async Task<ActionResult> UploadFileAsync()
+        public async Task<ActionResult> UploadFileAsync([FromForm] IFormFile file)
         {
             try
             {
-                var file = Request.Form.Files[0];
                 var supportedTypes = new[] { "csv", "xml"};
-                int filesize = 1000000; // bytes
+                int filesize = 1 * 1024 * 1024; // bytes
                 var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
                 if (!supportedTypes.Contains(fileExt))
                 {

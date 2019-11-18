@@ -59,9 +59,9 @@ export class AppComponent implements OnInit {
         let f;
         for (let file of files) {
             f = file;
-            formData.append(file.name, file);
+            formData.append('file', file);
         }
-        if (f.size > 1048576) {
+        if (f.size > (1 * 1024 * 1024)) {
             this.isError = true;
             this.message = 'File size Should Be UpTo 1MB';
             return;
