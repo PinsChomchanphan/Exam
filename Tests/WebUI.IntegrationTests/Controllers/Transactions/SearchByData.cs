@@ -24,7 +24,15 @@ namespace Exam2C2P.WebUI.IntegrationTests.Controllers.Transactions
         {
             var client = _factory.GetAnonymousClient();
 
-            var response = await client.GetAsync("/api/transaction/search");
+            var sq = new SearchTransactionQuery()
+            {
+                CurrencyCode = "",
+                Status = "",
+                StartDate = null,
+                DueDate = null
+            };
+            var content = Utilities.GetRequestContent(sq);
+            var response = await client.PatchAsync("/api/transaction/search" , content);
 
             response.EnsureSuccessStatusCode();
 
