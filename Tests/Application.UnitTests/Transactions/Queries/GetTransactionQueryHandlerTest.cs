@@ -14,19 +14,19 @@ namespace Exam2C2P.Application.UnitTests.Transactions.Queries
     [Collection("QueryCollection")]
     public class GetTransactionQueryHandlerTest : CommandTestBase
     {
-        private readonly ExamDatabaseDbContext _context;
+        private readonly ExamDatabaseDbContext _dbContext;
         private readonly IMapper _mapper;
 
         public GetTransactionQueryHandlerTest(QueryTestFixture fixture)
         {
-            _context = fixture.Context;
+            _dbContext = fixture.Context;
             _mapper = fixture.Mapper;
         }
 
         [Fact]
         public async Task GetCustomerDetail()
         {
-            var sut = new GetTransactionQueryHandler(_context, _mapper);
+            var sut = new GetTransactionQueryHandler(_dbContext, _mapper);
 
             var result = await sut.Handle(new GetTransactionQuery() , CancellationToken.None);
             result.ShouldContain(m => m.TransactionId.Equals("Invoice0000001", StringComparison.CurrentCultureIgnoreCase));

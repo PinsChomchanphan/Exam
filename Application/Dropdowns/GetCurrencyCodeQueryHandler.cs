@@ -17,10 +17,14 @@ namespace Exam2C2P.Application.Dropdowns
     {
         public async Task<List<string>> Handle(GetCurrencyCodeQuery request, CancellationToken cancellationToken)
         {
-            return Enum.GetValues(typeof(CurrencyCodes))
-                                       .Cast<CurrencyCodes>()
-                                       .Select(v => v.ToString())
-                                       .ToList();
+            return await Task.Run(() =>
+             {
+                 return Enum.GetValues(typeof(CurrencyCodes))
+                                        .Cast<CurrencyCodes>()
+                                        .Select(v => v.ToString())
+                                        .ToList();
+             });
+          
         }
     }
 }

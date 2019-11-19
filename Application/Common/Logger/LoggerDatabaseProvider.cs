@@ -1,6 +1,5 @@
 ﻿using Exam2C2P.Application.Common.Interfaces;
 using Exam2C2P.Domain.Entities;
-using Microsoft.ApplicationBlocks.Data;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -57,8 +56,6 @@ namespace Exam2C2P.Application.Common.Logger
 
             private void RecordMsg<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
             {
-
-
                 string query = @"INSERT INTO [dbo].[EventLogs]
                            ([EventId]
                            ,[LogLevel]
@@ -69,15 +66,18 @@ namespace Exam2C2P.Application.Common.Logger
                            ,@LogLevel
                            ,@Message
                            ,@Created)";
-                List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("@EventId", eventId.Id));
-                parameters.Add(new SqlParameter("@LogLevel", logLevel.ToString()));
-                parameters.Add(new SqlParameter("@Message", formatter(state, exception)));
-                var datetime = new SqlParameter("@Created", SqlDbType.DateTime);
-                datetime.Value = DateTime.UtcNow;
-                parameters.Add(datetime);
 
-                int rowsAffected = SqlHelper.ExecuteNonQuery(_connectionString, CommandType.Text, query, parameters.ToArray());
+                using SqlConnection connection = new SqlConnection(_connectionString);
+                using SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@EventId", eventId.Id);
+                command.Parameters.AddWithValue("@LogLevel", logLevel.ToString());
+                command.Parameters.AddWithValue("@Message", formatter(state, exception));
+                command.Parameters.AddWithValue("@Created", DateTime.UtcNow);
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+
             }
 
             public IDisposable BeginScope<TState>(TState state)
