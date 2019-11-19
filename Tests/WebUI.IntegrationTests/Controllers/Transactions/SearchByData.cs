@@ -32,7 +32,7 @@ namespace Exam2C2P.WebUI.IntegrationTests.Controllers.Transactions
                 DueDate = null
             };
             var content = Utilities.GetRequestContent(sq);
-            var response = await client.PatchAsync("/api/transaction/search" , content);
+            var response = await client.PostAsync("/api/transaction/search" , content);
 
             response.EnsureSuccessStatusCode();
 

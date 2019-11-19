@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -82,8 +83,8 @@ namespace Exam2C2P.Application.Transactions.Commands
                             CurrencyCode = isCorrect ? currencyCode : throw new Exception("The data is not correct"),
                             Created = DateTime.UtcNow,
                             FileType = CSV,
-                            TransactionDate = Convert.ToDateTime(fields[3]),
-                            Status = CheckStatus(CSV,fields[4])
+                            TransactionDate = DateTime.ParseExact(fields[3], "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture),
+                        Status = CheckStatus(CSV,fields[4])
 
                         };
                         transactionList.Add(model);
